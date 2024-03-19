@@ -1,0 +1,38 @@
+Generate a new board into a file:
+./board.pl X Y Z > foo
+
+(Warning, new line at end of the file)
+
+At start, get the first line of the file and extract some data:
+- The number of lines
+- The "empty" character
+- The "obstacle" character
+- The "full" character
+
+Check if the map is valid:
+- All lines have the same size
+- There is at least one line of one case
+- Each line end have a new line
+- The characteres in the map must be the same as in the first line
+If not print "map error\n".
+
+Start the parsing from the top corner left.
+
+Project Buid:
+- Makefile to compile all the project
+- Header to connect every function between them
+- C Files with necessary function for the project
+- Perl file to generate board into a text file
+- Text file with the board
+
+C Files:
+- main.c : takes maps as args, takes data from maps, check if errors and send them
+- error.c : takes maps data, check if no errors and send result (0 || 1)
+- check.c : applies all check needed for a valid map, if valid send data
+- 
+
+Stocker les valeurs de détection, à la fin du parsing total de la map récupérer le chuck associé
+à la valeur max.
+Récupération de quatre coordonnés, haut, bas, gauche, droite.
+Calculer la différence en nombre entre le haut et le bas ainsi que la gauche et la droite, remplir le
+plus grand écart.
