@@ -26,9 +26,11 @@ Project Buid:
 - Text file with the board
 
 C Files:
-- main.c : takes maps as args, takes data from maps, check if errors and send them
+- main.c : takes maps as args, takes data from maps (+ first line), check if errors and send them
+(struct to get maps infos)
 - error.c : takes maps data, check if no errors and send result (0 || 1)
 - check.c : applies all check needed for a valid map, if valid send data
+- is_numeric.c : return string with the lines number declared first line of the map
 - 
 
 Stocker les valeurs de détection, à la fin du parsing total de la map récupérer le chuck associé
@@ -36,3 +38,7 @@ Stocker les valeurs de détection, à la fin du parsing total de la map récupé
 Récupération de quatre coordonnés, haut, bas, gauche, droite.
 Calculer la différence en nombre entre le haut et le bas ainsi que la gauche et la droite, remplir le
 plus grand écart.
+
+Parsing avec une string par ligne, les strings seront précisement malloc au préalable,
+check chaque ligne, savoir la longeur max libre et regarder autant de lines que de longeur
+en dessous pour savoir si tout est libre, sinon, recommencer à la ligne inférieur.
