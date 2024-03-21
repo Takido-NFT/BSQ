@@ -31,7 +31,10 @@ C Files:
 - error.c : takes maps data, check if no errors and send result (0 || 1)
 - check.c : applies all check needed for a valid map, if valid send data
 - is_numeric.c : return string with the lines number declared first line of the map
-- 
+- alloc.c : memory allocate the map with check.c datas
+- parsing.c : parse all the strings and determine possible squares (struct: int size, int start, int fin)
+- sort.c : sort the int in the struct array provided by the parsing and get the biggest int
+- fill.c : fill the square in the determinated area
 
 Stocker les valeurs de détection, à la fin du parsing total de la map récupérer le chuck associé
 à la valeur max.
@@ -42,3 +45,5 @@ plus grand écart.
 Parsing avec une string par ligne, les strings seront précisement malloc au préalable,
 check chaque ligne, savoir la longeur max libre et regarder autant de lines que de longeur
 en dessous pour savoir si tout est libre, sinon, recommencer à la ligne inférieur.
+Stocker les coordonnées sous forme d'une int dans une struct, puis récupérer comparer
+les plus grandes valeurs, ainsi récupérer la plus grande avec sa position puis remplir la zone.
