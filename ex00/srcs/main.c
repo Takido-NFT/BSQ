@@ -26,12 +26,16 @@ char	*get_map(char *av)
 	str = (char *)malloc(BUFFER * sizeof(char));
 	file = open(av, O_RDWR);
 	if (file == -1)
-		return ("map error\n");
+	{
+		ft_putstr("map error\n");
+		return (NULL);
+	}
 	size = read(file, str, BUFFER);
 	if (size == -1)
 	{
 		close(file);
-		return ("map error\n");
+		ft_putstr("map error\n");
+		return (NULL);
 	}
 	str[size] = '\0';
 	close(file);
@@ -41,12 +45,26 @@ char	*get_map(char *av)
 int	main(int ac, char *av[])
 {
 	char	*map;
-	while (ac >= 2)
+	char	*str;
+	int		i;
+
+	map = NULL;
+	str = NULL;
+	i = 1;
+	while (ac > i)
 	{
-		map = get_map(av[ac - 1]);
-		ft_putstr(map_info(map));
-		ac--;
+		map = get_map(av[i]);
+		if (map != NULL)
+		{
+			str = map_info(map);
+			ft_putstr(str);
+		}
+		i++;
 	}
-	free(map);
+	if (str != NULL)
+	{
+		free(map);
+		free(str);
+	}
 	return (0);
 }

@@ -32,7 +32,7 @@ C Files:
 - ft_strlen.c : give the length of a string
 - error.c : takes maps data, check if no errors and send result (0 || 1)
 - check.c : applies all check needed for a valid map, if valid send data
-- is_numeric.c : return string with the lines number declared first line of the map
+- ft_atoi.c : return string with the lines number declared first line of the map
 - alloc.c : memory allocate the map with check.c datas
 - parsing.c : parse the string and determine possible squares (struct: int size, int start, int fin)
 - sort.c : sort the int in the struct array provided by the parsing and get the biggest int
