@@ -15,15 +15,7 @@
 
 #include <stdio.h>
 
-struct map_d
-{
-	int lines;
-	char empty;
-	char obstacle;
-	char full;
-};
-
-struct map_d struct_map_data(char *map_sdata, int i)
+int struct_map_data(char *map_sdata, int i)
 {
 	struct map_d map_data;
 
@@ -31,7 +23,13 @@ struct map_d struct_map_data(char *map_sdata, int i)
 	map_data.empty = map_sdata[i - 4];
 	map_data.obstacle = map_sdata[i - 3];
 	map_data.full = map_sdata[i - 2];
-	return (map_data);
+	printf("Lines: %d\n", map_data.lines);
+	printf("Empty: %c\n", map_data.empty);
+	printf("Full: %c\n", map_data.full);
+	printf("Obstacle: %c\n", map_data.obstacle);
+	if (error(map_data) == -1)
+		return (-1);
+	return (0);
 }
 
 char	*map_info(char *map)
@@ -40,7 +38,6 @@ char	*map_info(char *map)
 	char	*map_sdata;
     int		i;
 	int		j;
-	struct map_d map_data;
 
 	map_sdata = malloc((ft_strlen(map) + 1) * sizeof(char));
 	cut_map = malloc((ft_strlen(map) + 1) * sizeof(char));
@@ -52,11 +49,8 @@ char	*map_info(char *map)
 		i++;
 	}
 	map_sdata[i] = '\0';
-	map_data = struct_map_data(map_sdata, i);
-	printf("Lines : %d\n", map_data.lines);
-	printf("Empty character : %c\n", map_data.empty);
-	printf("Obstacle character : %c\n", map_data.obstacle);
-	printf("Full character : %c\n", map_data.full);
+	if (struct_map_data(map_sdata, i) == -1)
+		return (NULL);
 	while (map[i] != '\0')
 	{
 		cut_map[j] = map[i];

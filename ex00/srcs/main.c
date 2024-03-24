@@ -57,7 +57,10 @@ int	main(int ac, char *av[])
 		if (map != NULL)
 		{
 			str = map_info(map);
-			ft_putstr(str);
+			if (str != NULL)
+				ft_putstr(str);
+			else
+				ft_putstr("map error\n");
 		}
 		i++;
 	}
