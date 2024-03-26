@@ -14,6 +14,6 @@ int		ft_strlen(char *str);
 char	*ft_strcpy(char *fin, char *org);
 char	*map_info(char *map);
 int	    ft_atoi(char *str);
-int		error(struct map_d map_data);
+int		error(struct map_d map_data, char *cut_map);
 
 #endif
