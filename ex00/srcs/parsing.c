@@ -11,57 +11,98 @@
 /* ************************************************************************** */
 
 #include "../include/ft.h"
+#include <stdlib.h>
 
-struct	square_d parsing(char *cut_map, struct map_d map_data)
+#include <stdio.h>
+
+struct	square_d square_calc(char *cut_map, struct map_d map_data, int i);
+
+struct	square_d *map_parse(char *cut_map, struct map_d map_data)
 {
 	int	i;
-	int	j;
-	int width;
-	int temp;
-	int check;
-	int end_empty;
-	struct square_d square;
-
+	int j;
+	struct square_d *square;
+	
 	i = 0;
 	j = 0;
-	width = 0;
-	temp = 0;
-	check = 0;
-	end_empty = 0;
 	while (cut_map[i] != '\0')
 	{
-		if (cut_map[i] == map_data.empty)
+		if ((cut_map[i] == map_data.empty) && (cut_map[i - 1] != map_data.empty))
+			j++;
+		i++;
+	}
+	square = malloc(j * sizeof(struct square_d));
+	i = 0;
+	j = 0;
+	while (cut_map[i] != '\0')
+	{
+		if ((cut_map[i] == map_data.empty) && (cut_map[i - 1] != map_data.empty))
 		{
-			j = i; //keep the start value
-			square.start = j;
-			while (cut_map[i] == map_data.empty)
-			{
-				width++;
-				i++;
-			}
-			end_empty = i;
-			temp = width;
-			i = j; //keep the start
-			while (temp > 0)
-			{
-				while (cut_map[i + (map_data.lines * temp)] == map_data.empty)
-				{
-					check++;
-					i++;
-				}
-				if (check != width)
-					square.start = -1;
-				i = j;
-				check = 0;
-				temp--;
-			}
-			square.end = width;
-			i = end_empty;
+			square[j] = square_calc(cut_map, map_data, i);
+			j++;
 		}
 		i++;
 	}
 	return (square);
 }
-/*Récupérer la longeur de la ligne vide, puis regarder chaque line inférieur si elle est complètement
-  vide on a: str[i] jusqu'à str[i + 3] qui est vide alors on va checker si: str[i + (map_data.lines * width)]
-  jusqu'à str[i + 3 + (map_data.lines * witdh]*/
+
+struct	square_d square_calc(char *cut_map, struct map_d map_data, int i)
+{
+	int	width;
+	int	temp;
+	int check;
+	struct square_d square;
+	
+
+	width = 0;
+	temp = 0;
+	check = 0;
+	square.start = i;
+	square.end = i;
+	while (cut_map[i] == map_data.empty)
+	{
+		width++;
+		i++;
+	}
+	printf("width : %d\n", width);
+	i = i - width;
+	if (width == 1)
+	{
+		while (temp < width)
+		{
+			temp++;
+			if (cut_map[i + map_data.lines * temp] == map_data.empty)
+			{
+				while (check < width)
+				{
+					if (cut_map[i + map_data.lines * temp + check] == map_data.empty)
+						check++;
+					else
+					{
+						square.size = 0;
+						return (square);
+					}
+				}
+				check = 0;
+			}
+			else
+			{
+				square.size = 0;
+				return (square);
+			}
+		}
+		square.end = i + width + map_data.lines * temp;
+	}
+	if (square.start == square.end)
+		square.size = 1;
+	else
+		square.size = width * width;
+	printf("Start : %d\n", square.start);
+	printf("End : %d\n", square.end);
+	printf("Size : %d\n\n", square.size);
+	return (square);
+}
+/*Fonction qui lit toute la map, puis quand une char vide est rencontré, alors on appelle une fonction
+  qui va déterminer la longeur de la ligne de char vide et ensuite regarder si les lignes inférieurs
+  sont elles aussi de char vide et quelles forment la longeur attendue du carré, si oui alors une structure
+  square_d sera renvoyé, contenant le nombre du char de début, de fin, ainsi que la taille du carré*/

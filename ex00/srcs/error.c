@@ -18,7 +18,8 @@ int	map_errparse(struct map_d map_data, char *cut_map);
 
 int	error(struct map_d map_data, char *cut_map)
 {
-	struct square_d square;
+	struct square_d *square;
+
 	if (map_data.lines < 1)
 		return (-1);
 	if ((map_data.empty == map_data.full) || (map_data.full == map_data.obstacle)
@@ -30,8 +31,9 @@ int	error(struct map_d map_data, char *cut_map)
 		return (-1);
 	if (map_errparse(map_data, cut_map) == -1)
 		return (-1);
-	square = parsing(cut_map, map_data);
-	printf("%d\n%d\n", square.start, square.end);
+	square = map_parse(cut_map, map_data);
+	if (square[0].size == 0)
+		return (-1);
 	return (0);
 }
 
