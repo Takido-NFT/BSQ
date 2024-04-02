@@ -27,7 +27,7 @@ struct	square_d *map_parse(char *cut_map, struct map_d map_data)
 	j = 0;
 	while (cut_map[i] != '\0')
 	{
-		if ((cut_map[i] == map_data.empty) && (cut_map[i - 1] != map_data.empty))
+		if ((cut_map[i] == map_data.empty) && (cut_map[i - 1] == map_data.obstacle))
 			j++;
 		i++;
 	}
@@ -36,13 +36,16 @@ struct	square_d *map_parse(char *cut_map, struct map_d map_data)
 	j = 0;
 	while (cut_map[i] != '\0')
 	{
-		if ((cut_map[i] == map_data.empty) && (cut_map[i - 1] != map_data.empty))
+		if ((cut_map[i] == map_data.empty) && (cut_map[i - 1] == map_data.obstacle))
 		{
 			square[j] = square_calc(cut_map, map_data, i);
 			j++;
 		}
 		i++;
 	}
+	printf("Start : %d\n", square[1].start);
+	printf("End : %d\n", square[1].end);
+	printf("Size : %d\n\n", square[1].size);
 	return (square);
 }
 
@@ -51,6 +54,7 @@ struct	square_d square_calc(char *cut_map, struct map_d map_data, int i)
 	int	width;
 	int	temp;
 	int check;
+	int	map_wid = ft_strlenln(cut_map);
 	struct square_d square;
 	
 
@@ -58,24 +62,22 @@ struct	square_d square_calc(char *cut_map, struct map_d map_data, int i)
 	temp = 0;
 	check = 0;
 	square.start = i;
-	square.end = i;
 	while (cut_map[i] == map_data.empty)
 	{
 		width++;
 		i++;
 	}
-	printf("width : %d\n", width);
 	i = i - width;
-	if (width == 1)
+	printf("width = %d\n", width);
+	if (width > 1)
 	{
 		while (temp < width)
 		{
-			temp++;
-			if (cut_map[i + map_data.lines * temp] == map_data.empty)
+			if (cut_map[i + map_wid * temp] == map_data.empty)
 			{
 				while (check < width)
 				{
-					if (cut_map[i + map_data.lines * temp + check] == map_data.empty)
+					if (cut_map[i + map_wid * temp + check] == map_data.empty)
 						check++;
 					else
 					{
@@ -90,16 +92,16 @@ struct	square_d square_calc(char *cut_map, struct map_d map_data, int i)
 				square.size = 0;
 				return (square);
 			}
+			temp++;
 		}
-		square.end = i + width + map_data.lines * temp;
-	}
-	if (square.start == square.end)
-		square.size = 1;
-	else
+		square.end = i + width + map_wid * (temp - 1);
 		square.size = width * width;
-	printf("Start : %d\n", square.start);
-	printf("End : %d\n", square.end);
-	printf("Size : %d\n\n", square.size);
+	}
+	else 
+	{
+		square.end = square.start;
+		square.size = 1;
+	}
 	return (square);
 }
 /*Fonction qui lit toute la map, puis quand une char vide est rencontré, alors on appelle une fonction

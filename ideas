@@ -35,7 +35,8 @@ C Files:
 - ft_atoi.c : return string with the lines number declared first line of the map
 - alloc.c : memory allocate the map with check.c datas
 - parsing.c : parse the string and determine possible squares (struct: int size, int start, int fin)
-- sort.c : sort the int in the struct array provided by the parsing and get the biggest int
+- sort.c : sort the int in the struct array provided by the parsing and get the biggest int, start sort
+at the end.
 - fill.c : fill the square in the determinated area, take the file, store it modify precisely each char
 and save the file, finaly print it.
 

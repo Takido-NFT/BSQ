@@ -17,6 +17,7 @@ struct square_d {
 
 void	ft_putstr(char *str);
 int		ft_strlen(char *str);
+int		ft_strlenln(char *str);
 char	*ft_strcpy(char *fin, char *org);
 char	*map_info(char *map);
 int	    ft_atoi(char *str);

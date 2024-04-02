@@ -33,7 +33,7 @@ int	error(struct map_d map_data, char *cut_map)
 		return (-1);
 	square = map_parse(cut_map, map_data);
 	if (square[0].size == 0)
-		return (-1);
+		return (0);
 	return (0);
 }
 
