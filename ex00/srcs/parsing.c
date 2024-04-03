@@ -22,6 +22,7 @@ struct	square_d *map_parse(char *cut_map, struct map_d map_data)
 	int	i;
 	int j;
 	struct square_d *square;
+	struct square_d biggest;
 	
 	i = 0;
 	j = 0;
@@ -43,9 +44,8 @@ struct	square_d *map_parse(char *cut_map, struct map_d map_data)
 		}
 		i++;
 	}
-	printf("Start : %d\n", square[1].start);
-	printf("End : %d\n", square[1].end);
-	printf("Size : %d\n\n", square[1].size);
+	biggest = sort(square, j);
+	printf("Biggest square size is %d.\n", biggest.size);
 	return (square);
 }
 
@@ -68,7 +68,6 @@ struct	square_d square_calc(char *cut_map, struct map_d map_data, int i)
 		i++;
 	}
 	i = i - width;
-	printf("width = %d\n", width);
 	if (width > 1)
 	{
 		while (temp < width)
@@ -102,6 +101,7 @@ struct	square_d square_calc(char *cut_map, struct map_d map_data, int i)
 		square.end = square.start;
 		square.size = 1;
 	}
+	printf("Size = %d\n", square.size);
 	return (square);
 }
 /*Fonction qui lit toute la map, puis quand une char vide est rencontré, alors on appelle une fonction
