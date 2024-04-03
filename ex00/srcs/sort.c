@@ -18,38 +18,23 @@ est la plus grande, ainsi que parmi les plus grande celle la plus en haut à gau
 
 #include <stdio.h>
 
-struct  square_d sort(struct square_d *square, int j)
+struct  square_d sort(struct square_d *square, int size)
 {
-    int temp;
-    int sup;
-    int k;
+	int	i;
+	int num;
+    int	max;
 
-    temp = j;
-    sup = 0;
-    k = j - 3;
-    printf("j = %d\n", j);
-    while (k > 0)
-    {
-        while (j > 0)
-        {
-            if (square[k].size >= square[j].size)
-            {
-                sup++;
-            }
-            if (square[k].size < square[j].size)
-            {
-                sup--;
-            }
-            if (sup == temp)
-            {
-                printf("size = %d\n", square[k].size);
-                return (square[k]);
-            }
-            j--;
-        }
-        sup = 0;
-        j = temp;
-        k--;
-    }
-    return (square[k]);
+	i = 0;
+	num = 0;
+	max = square[i].size;
+	while (i < size - 1)
+	{
+		i++;
+		if (max < square[i].size)
+		{
+			max = square[i].size;
+			num = i;
+		}
+	}
+    return (square[num]);
 }
