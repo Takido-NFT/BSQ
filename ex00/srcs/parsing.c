@@ -20,31 +20,33 @@ struct	square_d square_calc(char *cut_map, struct map_d map_data, int i);
 struct	square_d *map_parse(char *cut_map, struct map_d map_data)
 {
 	int	i;
-	int j;
+	int size;
 	struct square_d *square;
 	struct square_d biggest;
 	
 	i = 0;
-	j = 0;
+	size = 0;
 	while (cut_map[i] != '\0')
 	{
 		if ((cut_map[i] == map_data.empty) && (cut_map[i - 1] == map_data.obstacle))
-			j++;
+			size++;
 		i++;
 	}
-	square = malloc(j * sizeof(struct square_d));
+	square = malloc(size * sizeof(struct square_d));
 	i = 0;
-	j = 0;
+	size = 0;
 	while (cut_map[i] != '\0')
 	{
 		if ((cut_map[i] == map_data.empty) && (cut_map[i - 1] == map_data.obstacle))
 		{
-			square[j] = square_calc(cut_map, map_data, i);
-			j++;
+			square[size] = square_calc(cut_map, map_data, i);
+			size++;
 		}
 		i++;
 	}
-	biggest = sort(square, j);
+	biggest = sort(square, size);
+	square_fill(cut_map, biggest, map_data);
+	free(square);
 	printf("Biggest square size is %d.\n", biggest.size);
 	return (square);
 }

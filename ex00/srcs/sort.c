@@ -16,8 +16,6 @@ est la plus grande, ainsi que parmi les plus grande celle la plus en haut à gau
 
 #include "../include/ft.h"
 
-#include <stdio.h>
-
 struct  square_d sort(struct square_d *square, int size)
 {
 	int	i;
