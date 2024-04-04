@@ -18,39 +18,37 @@ int	map_errparse(struct map_d map_data, char *cut_map);
 
 int	error(struct map_d map_data, char *cut_map)
 {
-	struct square_d *square;
-
 	if (map_data.lines < 1)
 		return (-1);
-	if ((map_data.empty == map_data.full) || (map_data.full == map_data.obstacle)
+	if ((map_data.empty == map_data.full)
+		|| (map_data.full == map_data.obstacle)
 		|| (map_data.obstacle == map_data.empty))
 		return (-1);
-	if ((map_data.empty <= ' ' && map_data.empty >= '~') ||
-		(map_data.full <= ' ' && map_data.empty >= '~') ||
-		(map_data.obstacle <= ' ' && map_data.empty >= '~'))
+	if ((map_data.empty <= ' ' && map_data.empty >= '~')
+		|| (map_data.full <= ' ' && map_data.empty >= '~')
+		|| (map_data.obstacle <= ' ' && map_data.empty >= '~'))
 		return (-1);
 	if (map_errparse(map_data, cut_map) == -1)
 		return (-1);
-	square = map_parse(cut_map, map_data);
-	if (square[0].size == 0)
-		return (0);
+	map_parse(cut_map, map_data);
 	return (0);
 }
 
 int	map_errparse(struct map_d map_data, char *cut_map)
 {
 	int	i;
-	int lenght;
+	int	lenght;
 
 	i = 1;
-	while (cut_map[++i] != '\n');
+	while (cut_map[i] != '\n')
+		i++;
 	lenght = i;
 	while (cut_map[i] != '\0')
 	{
-		if (cut_map[i] != map_data.empty &&
-			cut_map[i] != map_data.full &&
-			cut_map[i] != map_data.obstacle &&
-			cut_map[i] != '\n')
+		if (cut_map[i] != map_data.empty
+			&& cut_map[i] != map_data.full
+			&& cut_map[i] != map_data.obstacle
+			&& cut_map[i] != '\n')
 			return (-1);
 		if (cut_map[i] == '\n')
 		{

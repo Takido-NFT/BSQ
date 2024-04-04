@@ -13,11 +13,9 @@
 #include "../include/ft.h"
 #include <stdlib.h>
 
-#include <stdio.h>
-
-int struct_map_data(char *map_sdata, int i, char *cut_map)
+int	struct_map_data(char *map_sdata, int i, char *cut_map)
 {
-	struct map_d map_data;
+	struct map_d	map_data;
 
 	if (map_sdata[i - 5] >= '0' && map_sdata[i - 5] <= '9')
 	{
@@ -28,12 +26,6 @@ int struct_map_data(char *map_sdata, int i, char *cut_map)
 	}
 	else
 		return (-1);
-	/*
-	printf("Lines: %d\n", map_data.lines);
-	printf("Empty: %c\n", map_data.empty);
-	printf("Full: %c\n", map_data.full);
-	printf("Obstacle: %c\n", map_data.obstacle);
-	*/
 	if (error(map_data, cut_map) == -1)
 		return (-1);
 	return (0);
@@ -63,7 +55,7 @@ char	*map_cut(char *map, int i, char *map_sdata)
 char	*map_info(char *map)
 {
 	char	*map_sdata;
-    int		i;
+	int		i;
 
 	map_sdata = malloc((ft_strlen(map) + 1) * sizeof(char));
 	i = 0;

@@ -9,18 +9,13 @@
 /*   Updated: 2024/04/02 15:27:46 by tmalbeck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*Récupérer toutes les structures générés à l'envers, qui sont précisés avec j, 
-on bubble sort square[j].size, on récupère le plus grand on sait donc quelle structure
-est la plus grande, ainsi que parmi les plus grande celle la plus en haut à gauche*/
-
 #include "../include/ft.h"
 
-struct  square_d sort(struct square_d *square, int size)
+struct square_d	sort(struct square_d *square, int size)
 {
 	int	i;
-	int num;
-    int	max;
+	int	num;
+	int	max;
 
 	i = 0;
 	num = 0;
@@ -34,5 +29,5 @@ struct  square_d sort(struct square_d *square, int size)
 			num = i;
 		}
 	}
-    return (square[num]);
+	return (square[num]);
 }

@@ -27,7 +27,7 @@ int	ft_strlen(char *str)
 int	ft_strlenln(char *str)
 {
 	int	i;
-	/*i = 1 because cut_map[0] == '\n'*/
+
 	i = 1;
 	while (str[i] != '\n')
 		i++;

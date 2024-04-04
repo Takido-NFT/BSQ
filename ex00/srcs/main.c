@@ -53,7 +53,7 @@ int	main(int ac, char *av[])
 	i = 1;
 	while (ac > i)
 	{
-		map = get_map(av[i]);
+		map = get_map(av[i++]);
 		if (map != NULL)
 		{
 			str = map_info(map);
@@ -62,7 +62,6 @@ int	main(int ac, char *av[])
 			else
 				ft_putstr("map error\n");
 		}
-		i++;
 	}
 	if (str != NULL)
 	{

@@ -12,28 +12,18 @@
 
 #include "../include/ft.h"
 
-#include <stdio.h>
-
-/*Add particular case for size 1*/
-char	*square_fill(char *cut_map, struct square_d square, struct map_d map_data)
+char	*square_fill(char *cut_map, struct square_d square,
+	struct map_d map_data, int i)
 {
-	//char 	*fill_map;
 	int		map_wid;
 	int		iteration;
 	int		width;
-	int		i;
 
-	//fill_map = malloc((ft_strlen(cut_map) + 1) * sizeof(char));
 	map_wid = ft_strlenln(cut_map);
-	printf("map_width = %d\n", map_wid);
 	iteration = 0;
-	i = square.start;
 	width = 0;
-	while (cut_map[i] == map_data.empty)
-	{
+	while (cut_map[i++] == map_data.empty)
 		width++;
-		i++;
-	}
 	i = square.start;
 	while (i < square.end)
 	{
@@ -44,12 +34,31 @@ char	*square_fill(char *cut_map, struct square_d square, struct map_d map_data)
 		}
 		else
 		{
-			printf("i = %d\n", i);
 			i = i + map_wid - width - 1;
 			iteration = 0;
 		}
 		i++;
 	}
-	printf("Filled map :\n%s\n", cut_map);
 	return (cut_map);
+}
+
+char	*square_fill_one(char *cut_map,
+	struct map_d map_data, int i)
+{
+	cut_map[i] = map_data.full;
+	return (cut_map);
+}
+
+void	send_fill(struct square_d *square,
+	struct map_d map_data, int size, char *cut_map)
+{
+	struct square_d	biggest;
+	int				i;
+
+	biggest = sort(square, size);
+	i = biggest.start;
+	if (biggest.size > 1)
+		square_fill(cut_map, biggest, map_data, i);
+	else
+		square_fill_one(cut_map, map_data, i);
 }
