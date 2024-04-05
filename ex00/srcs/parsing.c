@@ -13,6 +13,8 @@
 #include "../include/ft.h"
 #include <stdlib.h>
 
+#include <stdio.h>
+
 struct square_d	square_exit(struct square_d square)
 {
 	square.size = 0;
@@ -25,7 +27,7 @@ struct square_d	square_values(int i, int width, int temp, int map_wid)
 
 	square.start = i;
 	square.end = i + width + map_wid * (temp - 1);
-	square.size = width * width;
+	square.size = width;
 	return (square);
 }
 
@@ -70,7 +72,15 @@ struct square_d	square_calc(char *cut_map, struct map_d map_data, int i)
 		width++;
 	i = i - width - 1;
 	if (width > 1)
-		square = square_check(cut_map, map_data, i, width);
+	{
+		while (width > 0)
+		{
+			square = square_check(cut_map, map_data, i, width);
+			if (square.size > 0)
+				return (square);
+			width--;
+		}
+	}
 	else
 	{
 		square.end = square.start;

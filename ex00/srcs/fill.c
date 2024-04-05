@@ -21,9 +21,7 @@ char	*square_fill(char *cut_map, struct square_d square,
 
 	map_wid = ft_strlenln(cut_map);
 	iteration = 0;
-	width = 0;
-	while (cut_map[i++] == map_data.empty)
-		width++;
+	width = square.size;
 	i = square.start;
 	while (i < square.end)
 	{
