@@ -15,6 +15,8 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
+#include <stdio.h>
+
 #define BUFFER 1000
 
 char	*get_map(char *av)
@@ -42,6 +44,23 @@ char	*get_map(char *av)
 	return (str);
 }
 
+char	*get_stdin()
+{
+	int		size;
+	char	*str;
+
+	str = (char *)malloc(BUFFER * sizeof(char));
+	size = read(STDIN_FILENO, str, BUFFER);
+	if (size == -1)
+	{
+		ft_putstr("map error\n");
+		return (NULL);
+	}
+	str[size] = '\0';
+	printf("%s", str);
+	return (str);
+}
+
 int	main(int ac, char *av[])
 {
 	char	*map;
@@ -51,6 +70,18 @@ int	main(int ac, char *av[])
 	map = NULL;
 	str = NULL;
 	i = 1;
+	if (ac == i)
+	{
+		map = get_stdin();
+		if (map != NULL)
+		{
+			str = map_info(map);
+			if (str != NULL)
+				ft_putstr(str);
+			else
+				ft_putstr("map error\n");
+		}
+	}
 	while (ac > i)
 	{
 		map = get_map(av[i++]);

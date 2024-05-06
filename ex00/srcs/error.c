@@ -12,11 +12,9 @@
 
 #include "../include/ft.h"
 
-#include <stdio.h>
+int	map_errparse(struct s_map map_data, char *cut_map);
 
-int	map_errparse(struct map_d map_data, char *cut_map);
-
-int	error(struct map_d map_data, char *cut_map)
+int	error(struct s_map map_data, char *cut_map)
 {
 	if (map_data.lines < 1)
 		return (-1);
@@ -34,7 +32,7 @@ int	error(struct map_d map_data, char *cut_map)
 	return (0);
 }
 
-int	map_errparse(struct map_d map_data, char *cut_map)
+int	map_errparse(struct s_map map_data, char *cut_map)
 {
 	int	i;
 	int	lenght;

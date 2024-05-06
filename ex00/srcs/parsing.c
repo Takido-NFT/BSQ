@@ -13,17 +13,15 @@
 #include "../include/ft.h"
 #include <stdlib.h>
 
-#include <stdio.h>
-
-struct square_d	square_exit(struct square_d square)
+struct s_square	square_exit(struct s_square square)
 {
 	square.size = 0;
 	return (square);
 }
 
-struct square_d	square_values(int i, int width, int temp, int map_wid)
+struct s_square	square_values(int i, int width, int temp, int map_wid)
 {
-	struct square_d	square;
+	struct s_square	square;
 
 	square.start = i;
 	square.end = i + width + map_wid * (temp - 1);
@@ -31,13 +29,13 @@ struct square_d	square_values(int i, int width, int temp, int map_wid)
 	return (square);
 }
 
-struct square_d	square_check(char *cut_map,
-	struct map_d map_data, int i, int width)
+struct s_square	square_check(char *cut_map,
+	struct s_map map_data, int i, int width)
 {
 	int				map_wid;
 	int				temp;
 	int				check;
-	struct square_d	square;
+	struct s_square	square;
 
 	map_wid = ft_strlenln(cut_map);
 	temp = 0;
@@ -61,10 +59,10 @@ struct square_d	square_check(char *cut_map,
 	return (square_values(i, width, temp, map_wid));
 }
 
-struct square_d	square_calc(char *cut_map, struct map_d map_data, int i)
+struct s_square	square_calc(char *cut_map, struct s_map map_data, int i)
 {
 	int				width;
-	struct square_d	square;
+	struct s_square	square;
 
 	width = 0;
 	square.start = i;
@@ -89,11 +87,11 @@ struct square_d	square_calc(char *cut_map, struct map_d map_data, int i)
 	return (square);
 }
 
-void	map_parse(char *cut_map, struct map_d map_data)
+void	map_parse(char *cut_map, struct s_map map_data)
 {
 	int				i;
 	int				size;
-	struct square_d	*square;
+	struct s_square	*square;
 
 	i = 0;
 	size = 0;
@@ -104,7 +102,7 @@ void	map_parse(char *cut_map, struct map_d map_data)
 				|| cut_map[i - 1] == '\n'))
 			size++;
 	}
-	square = malloc(size * sizeof(struct square_d));
+	square = malloc(size * sizeof(struct s_square));
 	i = 0;
 	size = 0;
 	while (cut_map[i++] != '\0')

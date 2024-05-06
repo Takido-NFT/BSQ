@@ -12,8 +12,8 @@
 
 #include "../include/ft.h"
 
-char	*square_fill(char *cut_map, struct square_d square,
-	struct map_d map_data, int i)
+char	*square_fill(char *cut_map, struct s_square square,
+	struct s_map map_data, int i)
 {
 	int		map_wid;
 	int		iteration;
@@ -41,16 +41,16 @@ char	*square_fill(char *cut_map, struct square_d square,
 }
 
 char	*square_fill_one(char *cut_map,
-	struct map_d map_data, int i)
+	struct s_map map_data, int i)
 {
 	cut_map[i] = map_data.full;
 	return (cut_map);
 }
 
-void	send_fill(struct square_d *square,
-	struct map_d map_data, int size, char *cut_map)
+void	send_fill(struct s_square *square,
+	struct s_map map_data, int size, char *cut_map)
 {
-	struct square_d	biggest;
+	struct s_square	biggest;
 	int				i;
 
 	biggest = sort(square, size);
