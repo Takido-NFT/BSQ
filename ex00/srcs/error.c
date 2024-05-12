@@ -12,6 +12,8 @@
 
 #include "../include/ft.h"
 
+#include <stdio.h>
+
 int	map_errparse(struct s_map map_data, char *cut_map);
 
 int	error(struct s_map map_data, char *cut_map)

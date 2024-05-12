@@ -1,6 +1,9 @@
 Generate a new board into a file:
 ./board.pl X Y Z > foo
 
+Memory check:
+valgrind --leak-check=yes myprog arg1 arg2
+
 (Warning, new line at end of the file)
 
 At start, get the first line of the file and extract some data:
