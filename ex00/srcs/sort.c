@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 #include "../include/ft.h"
 
+#include <stdio.h>
+
 struct s_square	sort(struct s_square *square, int size)
 {
 	int	i;

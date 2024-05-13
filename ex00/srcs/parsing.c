@@ -97,9 +97,7 @@ void	map_parse(char *cut_map, struct s_map map_data)
 	size = 0;
 	while (cut_map[i++] != '\0')
 	{
-		if ((cut_map[i] == map_data.empty) \
-			&& (cut_map[i - 1] == map_data.obstacle
-				|| cut_map[i - 1] == '\n'))
+		if (cut_map[i] == map_data.empty)
 			size++;
 	}
 	square = malloc(size * sizeof(struct s_square));
@@ -107,9 +105,7 @@ void	map_parse(char *cut_map, struct s_map map_data)
 	size = 0;
 	while (cut_map[i++] != '\0')
 	{
-		if ((cut_map[i] == map_data.empty) \
-			&& (cut_map[i - 1] == map_data.obstacle
-				|| cut_map[i - 1] == '\n'))
+		if (cut_map[i] == map_data.empty)
 			square[size++] = square_calc(cut_map, map_data, i);
 	}
 	send_fill(square, map_data, size, cut_map);

@@ -47,7 +47,10 @@ char	*map_cut(char *map, int i, char *map_sdata)
 	}
 	cut_map[j] = '\0';
 	if (struct_map_data(map_sdata, cut_map) == -1)
+	{
+		free(cut_map);
 		return (NULL);
+	}
 	return (cut_map);
 }
 

@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-#define BUFFER 1000
+#define BUFFER 16000
 
 char	*get_map(char *av)
 {
@@ -52,10 +52,11 @@ char	*get_stdin(void)
 	if (size == -1)
 	{
 		ft_putstr("map error\n");
-		free(str);
+		close(size);
 		return (NULL);
 	}
 	str[size] = '\0';
+	close(size);
 	return (str);
 }
 
@@ -76,6 +77,20 @@ char	*clear_map(char *str)
 	return (str);
 }
 
+void	result_map(char *map, char *str)
+{
+	if (map != NULL)
+	{
+		str = map_info(map);
+		if (str != NULL)
+			ft_putstr(clear_map(str));
+		else
+			ft_putstr("map error\n");
+	}
+	free(map);
+	free(str);
+}
+
 int	main(int ac, char *av[])
 {
 	char	*map;
@@ -88,33 +103,12 @@ int	main(int ac, char *av[])
 	if (ac == i)
 	{
 		map = get_stdin();
-		if (map != NULL)
-		{
-			str = map_info(map);
-			free(map);
-			if (str != NULL)
-				ft_putstr(clear_map(str));
-			else
-				ft_putstr("map error\n");
-			free(str);
-		}
+		result_map(map, str);
 	}
 	while (ac > i)
 	{
 		map = get_map(av[i++]);
-		if (map != NULL)
-		{
-			str = map_info(map);
-			if (str != NULL)
-				ft_putstr(clear_map(str));
-			else
-				ft_putstr("map error\n");
-		}
-	}
-	if (str != NULL)
-	{
-		free(map);
-		free(str);
+		result_map(map, str);
 	}
 	return (0);
 }
